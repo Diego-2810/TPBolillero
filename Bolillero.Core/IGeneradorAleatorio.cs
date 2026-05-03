@@ -7,8 +7,5 @@ namespace Bolillero.Core;
 
 public interface IGeneradorAleatorio
 {
-    int Generar(int min, int max)
-    {
-        return 0;
-    }
+    int Generar(int min, int max);
 }

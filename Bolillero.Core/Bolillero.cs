@@ -7,8 +7,8 @@ namespace Bolillero.Core;
 
 public class Bolillero
 {
-    private List<Bolilla> _bolillas;
-    private List<Bolilla> _bolillasExtraidas;
+    private readonly List<Bolilla> _bolillas;
+    private readonly List<Bolilla> _bolillasExtraidas;
     private readonly IGeneradorAleatorio _generador;
     public Bolillero(int cantidad, IGeneradorAleatorio generador)
     {
@@ -16,7 +16,7 @@ public class Bolillero
         _bolillas = new List<Bolilla>();
         _bolillasExtraidas = new List<Bolilla>();
 
-        for (int i = 0; i <= cantidad; i++)
+        for (int i = 0; i < cantidad; i++)
         {
             _bolillas.Add(new Bolilla(i));
         }
@@ -62,7 +62,7 @@ public class Bolillero
         return aciertos;
     }
 
-    private void ReiniciarBolillero()
+    public void ReiniciarBolillero()
     {
         _bolillas.AddRange(_bolillasExtraidas);
         _bolillasExtraidas.Clear();

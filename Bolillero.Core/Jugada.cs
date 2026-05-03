@@ -10,6 +10,9 @@ public class Jugada
     public List<int> Numeros { get; }
     public Jugada(List<int> numeros)
     {
+        if (numeros == null)
+            throw new ArgumentNullException(nameof(numeros));
+        
         Numeros = numeros;
     }
 }
