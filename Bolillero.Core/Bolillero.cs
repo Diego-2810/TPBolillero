@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
 
 namespace Bolillero.Core;
@@ -25,7 +26,7 @@ public class Bolillero
     public Bolilla SacarBolilla()
     {
         if (_bolillas.Count == 0)
-            return null;
+            throw new InvalidOperationException("No hay más bolillas para sacar.");
 
         int indice = _generador.Generar(0, _bolillas.Count);
         var bolillaExtraida = _bolillas[indice];
@@ -40,7 +41,7 @@ public class Bolillero
         {
             var bolilla = SacarBolilla();
 
-            if (bolilla == null || bolilla.Numero != numero)
+            if (bolilla.Numero != numero)
             {
                 return false;
             }
@@ -66,6 +67,8 @@ public class Bolillero
     {
         _bolillas.AddRange(_bolillasExtraidas);
         _bolillasExtraidas.Clear();
+        for (int i = 0; i < Total; i++)
+            _bolillas.Add(new Bolilla(i));
     }
 
     public int BolillasRestantes()
