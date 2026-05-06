@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bolillero.Core;
 
-public class Bolillero
+public class Bolillero : ICloneable
 {
     private readonly List<Bolilla> _bolillas;
     private readonly List<Bolilla> _bolillasExtraidas;
@@ -67,8 +67,6 @@ public class Bolillero
     {
         _bolillas.AddRange(_bolillasExtraidas);
         _bolillasExtraidas.Clear();
-        for (int i = 0; i < Total; i++)
-            _bolillas.Add(new Bolilla(i));
     }
 
     public int BolillasRestantes()
@@ -79,6 +77,20 @@ public class Bolillero
     public int CantidadBolillasExtraidas()
     {
         return _bolillasExtraidas.Count;
+    }
+
+    public object Clone()
+    {
+        var copia = new Bolillero(0, _generador);
+        foreach (var b in _bolillas)
+        {
+            copia._bolillas.Add(new Bolilla(b.Numero));
+        }
+        foreach (var b in _bolillasExtraidas)
+        {
+            copia._bolillasExtraidas.Add(new Bolilla(b.Numero));
+        }
+        return copia;
     }
     
 }
